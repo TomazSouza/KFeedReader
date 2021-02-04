@@ -1,11 +1,47 @@
 package com.example.kfeedreader
 
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.pkmmte.pkrss.Article
+import com.pkmmte.pkrss.Callback
+import com.pkmmte.pkrss.PkRSS
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Callback {
+
+    val listItens = arrayListOf<Item>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        PkRSS.with(this)
+            .load("https://rss/tecmundo.com.br/feed")
+            .callback(this)
+            .async()
+
     }
+
+    override fun onPreload() {
+        Toast.makeText(baseContext, "onPreload", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onLoaded(newArticles: MutableList<Article>?) {
+        newArticles?.mapTo(listItens) {
+            Item(it.title, it.author, it.date, it.source, it.enclosure.url)
+        }
+    }
+
+    override fun onLoadFailed() {
+        Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
+    }
+
+    data class Item(
+        val title: String,
+        val author: String,
+        val date: Long,
+        val link: Uri,
+        val image: String)
+
 }
