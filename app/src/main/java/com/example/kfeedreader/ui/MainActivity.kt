@@ -38,6 +38,4 @@ class MainActivity : AppCompatActivity(), Callback {
         Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
     }
 
-
-
 }
