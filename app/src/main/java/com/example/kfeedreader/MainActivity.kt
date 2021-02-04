@@ -10,7 +10,7 @@ import com.pkmmte.pkrss.PkRSS
 
 class MainActivity : AppCompatActivity(), Callback {
 
-    val listItens = arrayListOf<Item>()
+    private val listItems = arrayListOf<Item>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), Callback {
     }
 
     override fun onLoaded(newArticles: MutableList<Article>?) {
-        newArticles?.mapTo(listItens) {
+        newArticles?.mapTo(listItems) {
             Item(it.title, it.author, it.date, it.source, it.enclosure.url)
         }
     }
@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), Callback {
         val author: String,
         val date: Long,
         val link: Uri,
-        val image: String)
+        val image: String
+    )
 
 }
