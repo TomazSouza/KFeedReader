@@ -1,9 +1,10 @@
-package com.example.kfeedreader
+package com.example.kfeedreader.ui
 
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.kfeedreader.R
+import com.example.kfeedreader.models.Item
 import com.pkmmte.pkrss.Article
 import com.pkmmte.pkrss.Callback
 import com.pkmmte.pkrss.PkRSS
@@ -37,12 +38,6 @@ class MainActivity : AppCompatActivity(), Callback {
         Toast.makeText(baseContext, "Failed", Toast.LENGTH_SHORT).show()
     }
 
-    data class Item(
-        val title: String,
-        val author: String,
-        val date: Long,
-        val link: Uri,
-        val image: String
-    )
+
 
 }
