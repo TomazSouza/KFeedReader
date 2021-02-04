@@ -1,4 +1,4 @@
-tpackage com.example.kfeedreader
+package com.example.kfeedreader
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
