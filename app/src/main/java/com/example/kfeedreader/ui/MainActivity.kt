@@ -3,9 +3,11 @@ package com.example.kfeedreader.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.DataBindingComponent
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kfeedreader.R
 import com.example.kfeedreader.adapter.FeedsAdapter
+import com.example.kfeedreader.adapter.FragmentDataBindingComponent
 import com.example.kfeedreader.models.ItemFeed
 import com.pkmmte.pkrss.Article
 import com.pkmmte.pkrss.Callback
@@ -15,14 +17,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), Callback {
 
     private val listItems = arrayListOf<ItemFeed>()
-    lateinit var rvListFeed: RecyclerView
-    lateinit var feedAdapter: FeedsAdapter
+    private lateinit var rvListFeed: RecyclerView
+    private lateinit var feedAdapter: FeedsAdapter
+
+    private var mDataBindingComponent: DataBindingComponent = FragmentDataBindingComponent(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        feedAdapter = FeedsAdapter(listItems, this)
+        feedAdapter = FeedsAdapter(listItems, this, mDataBindingComponent)
         rv_feeds.setHasFixedSize(true)
         rv_feeds.adapter = feedAdapter
 

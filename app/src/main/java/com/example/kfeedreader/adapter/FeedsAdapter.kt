@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kfeedreader.R
@@ -17,7 +18,8 @@ import kotlin.collections.ArrayList
 
 class FeedsAdapter(
     private val listFeeds: ArrayList<ItemFeed>,
-    private val context: Context
+    private val context: Context,
+    private val dataBindingComponent: DataBindingComponent
 ) : RecyclerView.Adapter<FeedsAdapter.FeedViewHolder>() {
 
     init {
@@ -27,7 +29,7 @@ class FeedsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding: ItemListFeedBinding = DataBindingUtil
-            .inflate(inflater, R.layout.item_list_feed, parent, false)
+            .inflate(inflater, R.layout.item_list_feed, parent, false, dataBindingComponent)
         return FeedViewHolder(binding)
     }
 
